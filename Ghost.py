@@ -1,20 +1,26 @@
+import pygame
 from pygame.locals import *
+
+# Cargamos las bibliotecas de OpenGL
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-class Pacman:
+import random
+import math
+import numpy as np
+
+class Ghost:
     
     def __init__(self, size, boardSize):
         
         self.DimBoard = boardSize
         self.size = size
         self.x = 26
-        self.y = 510
+        self.y = 546 - 520
         self.z = 0
 
     def draw(self):
-        glColor3f(1.0, 1.0, 1.0)
         glBegin(GL_QUADS)
         # Front face
         glVertex3f(self.x, self.y, self.z + self.size)
