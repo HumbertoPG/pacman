@@ -79,9 +79,9 @@ def Init():
 
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
-    gluLookAt(DimBoard/2, DimBoard/2, DimBoard,  # Posición de la cámara
+    gluLookAt(DimBoard/2, DimBoard/2, -DimBoard,  # Posición de la cámara
           DimBoard/2, DimBoard/2, 0,  # Punto al que la cámara está mirando
-          0, 1, 0)  # Dirección hacia arriba
+          0, -1, 0) 
 
     glClearColor(0,0,0,0)
     glEnable(GL_DEPTH_TEST)
@@ -91,30 +91,50 @@ def Init():
     
 def PlanoTexturizado():
     #Activate textures
-    glColor3f(1.0,1.0,1.0)
+    # glColor3f(1.0,1.0,1.0)
+    # glEnable(GL_TEXTURE_2D)
+    # #front face
+    # glBindTexture(GL_TEXTURE_2D, textures[0])    
+    # glBegin(GL_QUADS)
+    # glTexCoord2f(0.0, 1.0)  # Cambiado a (0.0, 1.0)
+    # glVertex3d(0, 0, 0) # Esquina inferior izquierda
+    # glTexCoord2f(1.0, 1.0)  # Cambiado a (1.0, 1.0)
+    # glVertex3d(DimBoard, 0, 0)  # Esquina inferior derecha
+    # glTexCoord2f(1.0, 0.0)  # Cambiado a (1.0, 0.0)
+    # glVertex3d(DimBoard, DimBoard, 0)  # Esquina superior derecha
+    # glTexCoord2f(0.0, 0.0)  # Cambiado a (0.0, 0.0)
+    # glVertex3d(0, DimBoard, 0)  # Esquina superior izquierda
+    # glEnd()              
+    # glDisable(GL_TEXTURE_2D)
+    
+    
+    glColor3f(1, 1, 1)
     glEnable(GL_TEXTURE_2D)
-    #front face
     glBindTexture(GL_TEXTURE_2D, textures[0])    
     glBegin(GL_QUADS)
-    glTexCoord2f(0.0, 1.0)  # Cambiado a (0.0, 1.0)
-    glVertex3d(0, 0, 0) # Esquina inferior izquierda
-    glTexCoord2f(1.0, 1.0)  # Cambiado a (1.0, 1.0)
-    glVertex3d(DimBoard, 0, 0)  # Esquina inferior derecha
     glTexCoord2f(1.0, 0.0)  # Cambiado a (1.0, 0.0)
-    glVertex3d(DimBoard, DimBoard, 0)  # Esquina superior derecha
+    glVertex3d(0, 0, 0)
+    glTexCoord2f(1.0, 1.0)  # Cambiado a (1.0, 1.0)
+    glVertex3d(0, DimBoard, 0)
+    glTexCoord2f(0.0, 1.0)  # Cambiado a (0.0, 1.0)
+    glVertex3d(DimBoard, DimBoard, 0)
     glTexCoord2f(0.0, 0.0)  # Cambiado a (0.0, 0.0)
-    glVertex3d(0, DimBoard, 0)  # Esquina superior izquierda
+    glVertex3d(DimBoard, 0, 0)
     glEnd()              
     glDisable(GL_TEXTURE_2D)
+
 
 pacman = Pacman(10, DimBoard)
 ghost = Ghost(10, DimBoard)
 
 def display():
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     Axis()
     PlanoTexturizado()
-    pacman.draw()
+    # pacman.draw()
+    # pacman.update()
+    
     ghost.draw()  # Dibuja el cubo
     ghost.update()
 
@@ -126,9 +146,6 @@ while not done:
         
         if event.type == pygame.QUIT:
             done = True
-        if event.type == pygame.KEYDOWN:
-            if event.type == pygame.K_RIGHT:
-                pacman.x += 1
 
     
 
