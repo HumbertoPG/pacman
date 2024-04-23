@@ -112,13 +112,13 @@ def PlanoTexturizado():
     glEnable(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, textures[0])    
     glBegin(GL_QUADS)
-    glTexCoord2f(1.0, 0.0)  # Cambiado a (1.0, 0.0)
+    glTexCoord2f(1.0, 0.0)
     glVertex3d(0, 0, 0)
-    glTexCoord2f(1.0, 1.0)  # Cambiado a (1.0, 1.0)
+    glTexCoord2f(1.0, 1.0)
     glVertex3d(0, DimBoard, 0)
-    glTexCoord2f(0.0, 1.0)  # Cambiado a (0.0, 1.0)
+    glTexCoord2f(0.0, 1.0)
     glVertex3d(DimBoard, DimBoard, 0)
-    glTexCoord2f(0.0, 0.0)  # Cambiado a (0.0, 0.0)
+    glTexCoord2f(0.0, 0.0)
     glVertex3d(DimBoard, 0, 0)
     glEnd()              
     glDisable(GL_TEXTURE_2D)
@@ -132,27 +132,25 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     Axis()
     PlanoTexturizado()
-    # pacman.draw()
-    # pacman.update()
+    pacman.draw()
+    pacman.update()
     
     ghost.draw()  # Dibuja el cubo
     ghost.update()
 
 done = False
+
 Init()
+
 while not done:
     
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT:
             done = True
-
-    
-
-    # pacman.x += 1
+            
     display()
     
-
     pygame.display.flip()
     pygame.time.wait(5)
 
