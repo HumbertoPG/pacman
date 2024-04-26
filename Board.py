@@ -124,7 +124,7 @@ def PlanoTexturizado():
     glDisable(GL_TEXTURE_2D)
 
 
-pacman = Pacman(10, DimBoard)
+pacman = Pacman(20)
 ghost = Ghost(10, DimBoard)
 
 def display():

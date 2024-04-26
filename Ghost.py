@@ -63,8 +63,8 @@ class Ghost:
         
         self.DimBoard = boardSize
         self.size = size
-        self.x = 21
-        self.y = 21
+        self.x = 25
+        self.y = 25
         self.z = -1
         
         self.currentDirection = 2
@@ -74,24 +74,25 @@ class Ghost:
         glColor3f(1.0, 0.0, 0.0)
         glBegin(GL_QUADS)
         
-        glVertex3f(self.x, self.y, self.z)
-        glVertex3f(self.x + self.size, self.y, self.z)
-        glVertex3f(self.x + self.size, self.y + self.size, self.z)
-        glVertex3f(self.x, self.y + self.size, self.z)
+        half_size = self.size / 2
+        glVertex3f(self.x - half_size, self.y - half_size, self.z)
+        glVertex3f(self.x + half_size, self.y - half_size, self.z)
+        glVertex3f(self.x + half_size, self.y + half_size, self.z)
+        glVertex3f(self.x - half_size, self.y + half_size, self.z)
         
         glEnd()
 
     
     def update(self):
         
-        if (px_X[(self.x - 20)] != -1 and px_Y[(self.y - 20)] != -1):
+        if (px_X[(self.x - 24)] != -1 and px_Y[(self.y - 24)] != -1):
             
-            if (control[px_Y[(self.y - 20)]][px_X[(self.x - 20)]] != 0):
+            if (control[px_Y[(self.y - 24)]][px_X[(self.x - 24)]] != 0):
                 
-                tmp = random.choice(directions[control[px_Y[(self.y - 20)]][px_X[(self.x - 20)]]])
+                tmp = random.choice(directions[control[px_Y[(self.y - 24)]][px_X[(self.x - 24)]]])
                 
                 while tmp == (self.currentDirection * -1):
-                    tmp = random.choice(directions[control[px_Y[(self.y - 20)]][px_X[(self.x - 20)]]])
+                    tmp = random.choice(directions[control[px_Y[(self.y - 24)]][px_X[(self.x - 24)]]])
                 
                 self.currentDirection = tmp
         

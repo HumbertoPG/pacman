@@ -10,12 +10,11 @@ control = Control()
 
 class Pacman:
     
-    def __init__(self, size, boardSize):
-        
-        self.DimBoard = boardSize
+    def __init__(self, size):
+
         self.size = size
-        self.x = 21
-        self.y = 21
+        self.x = 25
+        self.y = 25
         self.z = -1
         
         self.currentDirection = 0
@@ -25,17 +24,21 @@ class Pacman:
         glColor3f(1.0, 1.0, 0.0)
         glBegin(GL_QUADS)
         
-        glVertex3f(self.x, self.y, self.z)
-        glVertex3f(self.x + self.size, self.y, self.z)
-        glVertex3f(self.x + self.size, self.y + self.size, self.z)
-        glVertex3f(self.x, self.y + self.size, self.z)
+        half_size = self.size / 2
+        glVertex3f(self.x - half_size, self.y - half_size, self.z)
+        glVertex3f(self.x + half_size, self.y - half_size, self.z)
+        glVertex3f(self.x + half_size, self.y + half_size, self.z)
+        glVertex3f(self.x - half_size, self.y + half_size, self.z)
         
         glEnd()
     
     def update(self):
         
         keys = pygame.key.get_pressed()
-        if (control.px_X[(self.x - 20)] != -1 and control.px_Y[(self.y - 20)] != -1):
+        if (control.px_X[(self.x - 24)] != -1 and control.px_Y[(self.y - 24)] != -1):
+
+            print(control.intersections[control.px_Y[(self.y - 24)]][control.px_X[(self.x - 24)]])
+
             if keys[pygame.K_RIGHT] and (-2 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
                 self.currentDirection = -2
             elif keys[pygame.K_DOWN] and (-1 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
