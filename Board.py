@@ -123,9 +123,9 @@ def PlanoTexturizado():
     glEnd()              
     glDisable(GL_TEXTURE_2D)
 
-
 pacman = Pacman(20)
-ghost = Ghost(10, DimBoard)
+ghost0 = Ghost(20, 0)
+ghost1 = Ghost(20, 1)
 
 def display():
     
@@ -135,8 +135,11 @@ def display():
     pacman.draw()
     pacman.update()
     
-    ghost.draw()  # Dibuja el cubo
-    ghost.update()
+    ghost0.draw()
+    ghost0.update(pacman.x, pacman.y)
+
+    ghost1.draw()
+    ghost1.update(pacman.x, pacman.y)
 
 done = False
 

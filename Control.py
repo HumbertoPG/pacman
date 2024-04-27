@@ -1,6 +1,23 @@
+from pathfinding.core.grid import Grid
+from pathfinding.finder.a_star import AStarFinder
+
+import os
+import numpy as np
+import pandas as pd
+
+BASE_PATH = os.path.abspath(os.path.dirname(__file__))
+CSV_FILE = os.path.join(BASE_PATH, 'mapa.csv')
+
 class Control:
 
     def __init__(self):
+
+        self.path = []
+        self.grid = []
+
+        self.matrix = np.array(pd.io.parsers.read_csv(CSV_FILE, header=None)).astype("int")
+
+        self.grid = Grid(matrix=self.matrix)
 
         self.intersections = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             [0, 1, 10, 5, 10, 2, 1, 10, 5, 10, 2],
@@ -51,3 +68,15 @@ class Control:
         # -1: Down
         #  2: Left
         # -2: Rigth
+
+    def finding(self, nstart, nend):
+        self.grid.cleanup()
+        # get start and end point 
+        start = self.grid.node(nstart[0], nstart[1])
+        end = self.grid.node(nend[0], nend[1])
+        # create a finder with A* algorithm
+        finder = AStarFinder() 
+        # returns a list with the path and the amount of times the finder had to run to get the path 
+        path, runs = finder.find_path(start, end, self.grid)
+
+        return path
