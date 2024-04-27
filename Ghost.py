@@ -39,7 +39,7 @@ class Ghost:
         
         if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
             
-            if (control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]] != 0):
+            if (control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]] < 10):
                 
                 tmp = random.choice(control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]])
                 
