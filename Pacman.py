@@ -35,17 +35,17 @@ class Pacman:
     def update(self):
         
         keys = pygame.key.get_pressed()
-        if (control.px_X[(self.x - 24)] != -1 and control.px_Y[(self.y - 24)] != -1):
+        if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
 
-            print(control.intersections[control.px_Y[(self.y - 24)]][control.px_X[(self.x - 24)]])
+            print(control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]])
 
-            if keys[pygame.K_RIGHT] and (-2 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
+            if keys[pygame.K_RIGHT] and (-2 in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]):
                 self.currentDirection = -2
-            elif keys[pygame.K_DOWN] and (-1 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
+            elif keys[pygame.K_DOWN] and (-1 in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]):
                 self.currentDirection = -1
-            elif keys[pygame.K_UP] and (1 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
+            elif keys[pygame.K_UP] and (1 in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]):
                 self.currentDirection = 1
-            elif keys[pygame.K_LEFT] and (2 in control.directions[control.intersections[control.px_Y[(self.y - 20)]][control.px_X[(self.x - 20)]]]):
+            elif keys[pygame.K_LEFT] and (2 in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]):
                 self.currentDirection = 2
         if (self.x > 547 or self.y > 547):
             self.currentDirection = 0
