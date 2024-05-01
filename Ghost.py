@@ -21,21 +21,34 @@ class Ghost:
         
         self.currentDirection = -2
 
-    def draw(self):
+    def draw(self, texture, id):
         
-        glColor3f(1.0, 0.0, 0.0)
+        glEnable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, texture[id])
+        
+        glColor3f(1.0, 1.0, 0.0)
         glBegin(GL_QUADS)
         
         half_size = self.size / 2
+        
+        glTexCoord2f(0.0, 0.0)
         glVertex3f(self.x - half_size, self.y - half_size, self.z)
+        glTexCoord2f(1.0, 0.0)
         glVertex3f(self.x + half_size, self.y - half_size, self.z)
+        glTexCoord2f(1.0, 1.0)
         glVertex3f(self.x + half_size, self.y + half_size, self.z)
+        glTexCoord2f(0.0, 1.0)
         glVertex3f(self.x - half_size, self.y + half_size, self.z)
         
         glEnd()
+        glDisable(GL_TEXTURE_2D)
 
     
     def update(self, pX, pY):
+
+        if (self.x == pX and self.y == pY):
+            print("Game Over")
+            return
         
         if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
             
@@ -52,21 +65,22 @@ class Ghost:
                     
                     else:
 
-                        moves = control.finding((self.x - 25, self.y - 26), (pX - 25, pY - 25))
-                        
-                        print("Path: ")
+                        if (abs(self.x - pX) > 2 or abs(self.y - pY)):
 
-                        for i in range(0, 10):
-                            print(moves[i].x, moves[i].y)
-                        
-                        if (moves[1].x + 25 > self.x):
-                            self.currentDirection = -2
-                        elif (moves[1].x + 25 < self.x):
-                            self.currentDirection = 2
-                        elif (moves[1].y + 26 > self.y):
-                            self.currentDirection = -1
-                        elif (moves[1].y + 26 < self.y):
-                            self.currentDirection = 1
+                            moves = []
+                            
+                            moves = control.finding((self.x - 25, self.y - 25), (pX - 25, pY - 25))
+                            
+                            print(pX, pY)
+                            
+                            if (moves[1].x + 25 > self.x):
+                                self.currentDirection = -2
+                            elif (moves[1].x + 25 < self.x):
+                                self.currentDirection = 2
+                            elif (moves[1].y + 25 > self.y):
+                                self.currentDirection = -1
+                            elif (moves[1].y + 25 < self.y):
+                                self.currentDirection = 1
         
         if (self.currentDirection == 1):
             self.y -= 1

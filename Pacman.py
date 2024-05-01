@@ -19,18 +19,27 @@ class Pacman:
         
         self.currentDirection = 0
 
-    def draw(self):
+    def draw(self, texture, id):
+        
+        glEnable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, texture[id])
         
         glColor3f(1.0, 1.0, 0.0)
         glBegin(GL_QUADS)
         
         half_size = self.size / 2
+        
+        glTexCoord2f(0.0, 0.0)
         glVertex3f(self.x - half_size, self.y - half_size, self.z)
+        glTexCoord2f(1.0, 0.0)
         glVertex3f(self.x + half_size, self.y - half_size, self.z)
+        glTexCoord2f(1.0, 1.0)
         glVertex3f(self.x + half_size, self.y + half_size, self.z)
+        glTexCoord2f(0.0, 1.0)
         glVertex3f(self.x - half_size, self.y + half_size, self.z)
         
         glEnd()
+        glDisable(GL_TEXTURE_2D)
     
     def update(self):
         

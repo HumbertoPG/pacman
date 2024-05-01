@@ -19,6 +19,8 @@ class Control:
 
         self.grid = Grid(matrix=self.matrix)
 
+        self.finder = AStarFinder() 
+
         self.intersections = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                             [0, 1, 10, 5, 10, 2, 1, 10, 5, 10, 2],
                             [0, 8, 10, 9, 5, 7, 7, 5, 9, 10, 6],
@@ -70,13 +72,13 @@ class Control:
         # -2: Rigth
 
     def finding(self, nstart, nend):
+
         self.grid.cleanup()
         # get start and end point 
         start = self.grid.node(nstart[0], nstart[1])
         end = self.grid.node(nend[0], nend[1])
         # create a finder with A* algorithm
-        finder = AStarFinder() 
         # returns a list with the path and the amount of times the finder had to run to get the path 
-        path, runs = finder.find_path(start, end, self.grid)
+        path, runs = self.finder.find_path(start, end, self.grid)
 
         return path

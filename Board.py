@@ -21,6 +21,9 @@ ZFAR = 1000.0
 DimBoard = 546
 textures = []
 filename1 = "board.png"
+filename2 = "pacman.png"
+filename3 = "ghost1.png"
+filename4 = "ghost4.png"
 
 X_MIN=-500
 X_MAX=500
@@ -88,6 +91,10 @@ def Init():
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
     
     Texturas(filename1)
+    Texturas(filename2)
+    Texturas(filename3)
+    Texturas(filename4)
+
     
 def PlanoTexturizado():
     #Activate textures
@@ -123,22 +130,22 @@ def PlanoTexturizado():
     glEnd()              
     glDisable(GL_TEXTURE_2D)
 
-pacman = Pacman(20)
-ghost0 = Ghost(20, 0)
-ghost1 = Ghost(20, 1)
+pacman = Pacman(30)
+ghost0 = Ghost(30, 0)
+ghost1 = Ghost(30, 1)
 
 def display():
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     Axis()
     PlanoTexturizado()
-    pacman.draw()
+
+    pacman.draw(textures, 1)
     pacman.update()
-    
-    ghost0.draw()
+    ghost0.draw(textures, 2)
     ghost0.update(pacman.x, pacman.y)
 
-    ghost1.draw()
+    ghost1.draw(textures, 3)
     ghost1.update(pacman.x, pacman.y)
 
 done = False
