@@ -26,7 +26,7 @@ class Ghost:
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, texture[id])
         
-        glColor3f(1.0, 1.0, 0.0)
+        glColor3f(1.0, 1.0, 1.0)
         glBegin(GL_QUADS)
         
         half_size = self.size / 2
@@ -48,7 +48,9 @@ class Ghost:
 
         if (self.x == pX and self.y == pY):
             print("Game Over")
-            return
+            
+            if (self.type == 1):
+                return
         
         if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
             
@@ -71,8 +73,6 @@ class Ghost:
                             
                             moves = control.finding((self.x - 25, self.y - 25), (pX - 25, pY - 25))
                             
-                            print(pX, pY)
-                            
                             if (moves[1].x + 25 > self.x):
                                 self.currentDirection = -2
                             elif (moves[1].x + 25 < self.x):
@@ -81,6 +81,10 @@ class Ghost:
                                 self.currentDirection = -1
                             elif (moves[1].y + 25 < self.y):
                                 self.currentDirection = 1
+        
+        if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
+            if ((self.currentDirection in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]) == False):
+                self.currentDirection = 0
         
         if (self.currentDirection == 1):
             self.y -= 1

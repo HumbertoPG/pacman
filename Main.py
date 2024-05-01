@@ -20,10 +20,12 @@ ZFAR = 1000.0
 
 DimBoard = 546
 textures = []
-filename1 = "board.png"
-filename2 = "pacman.png"
-filename3 = "ghost1.png"
-filename4 = "ghost4.png"
+filename1 = "Textures/board.png"
+filename2 = "Textures/pacman.png"
+filename3 = "Textures/ghost1.png"
+filename4 = "Textures/ghost2.png"
+filename5 = "Textures/ghost3.png"
+filename6 = "Textures/ghost4.png"
 
 X_MIN=-500
 X_MAX=500
@@ -31,6 +33,9 @@ Y_MIN=-500
 Y_MAX=500
 Z_MIN=-500
 Z_MAX=500
+
+ghosts = []
+pacman = Pacman(30)
 
 pygame.init()
 
@@ -94,26 +99,17 @@ def Init():
     Texturas(filename2)
     Texturas(filename3)
     Texturas(filename4)
+    Texturas(filename5)
+    Texturas(filename6)
+    
+    pacman = Pacman(30)
+    ghosts.append(Ghost(30, 1))
+    
+    for i in range(0, 3):
+        ghosts.append(Ghost(30, 0))
 
     
 def PlanoTexturizado():
-    #Activate textures
-    # glColor3f(1.0,1.0,1.0)
-    # glEnable(GL_TEXTURE_2D)
-    # #front face
-    # glBindTexture(GL_TEXTURE_2D, textures[0])    
-    # glBegin(GL_QUADS)
-    # glTexCoord2f(0.0, 1.0)  # Cambiado a (0.0, 1.0)
-    # glVertex3d(0, 0, 0) # Esquina inferior izquierda
-    # glTexCoord2f(1.0, 1.0)  # Cambiado a (1.0, 1.0)
-    # glVertex3d(DimBoard, 0, 0)  # Esquina inferior derecha
-    # glTexCoord2f(1.0, 0.0)  # Cambiado a (1.0, 0.0)
-    # glVertex3d(DimBoard, DimBoard, 0)  # Esquina superior derecha
-    # glTexCoord2f(0.0, 0.0)  # Cambiado a (0.0, 0.0)
-    # glVertex3d(0, DimBoard, 0)  # Esquina superior izquierda
-    # glEnd()              
-    # glDisable(GL_TEXTURE_2D)
-    
     
     glColor3f(1, 1, 1)
     glEnable(GL_TEXTURE_2D)
@@ -130,10 +126,6 @@ def PlanoTexturizado():
     glEnd()              
     glDisable(GL_TEXTURE_2D)
 
-pacman = Pacman(30)
-ghost0 = Ghost(30, 0)
-ghost1 = Ghost(30, 1)
-
 def display():
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -142,11 +134,10 @@ def display():
 
     pacman.draw(textures, 1)
     pacman.update()
-    ghost0.draw(textures, 2)
-    ghost0.update(pacman.x, pacman.y)
-
-    ghost1.draw(textures, 3)
-    ghost1.update(pacman.x, pacman.y)
+    
+    for i in range(0, 4):
+        ghosts[i].draw(textures, i + 2)
+        ghosts[i].update(pacman.x, pacman.y)
 
 done = False
 

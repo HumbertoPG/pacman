@@ -74,11 +74,9 @@ class Control:
     def finding(self, nstart, nend):
 
         self.grid.cleanup()
-        # get start and end point 
+        
         start = self.grid.node(nstart[0], nstart[1])
         end = self.grid.node(nend[0], nend[1])
-        # create a finder with A* algorithm
-        # returns a list with the path and the amount of times the finder had to run to get the path 
         path, runs = self.finder.find_path(start, end, self.grid)
 
         return path

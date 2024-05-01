@@ -54,6 +54,15 @@ class Pacman:
                 self.currentDirection = 1
             elif keys[pygame.K_LEFT] and (2 in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]):
                 self.currentDirection = 2
+        
+        if keys[pygame.K_RIGHT] and self.currentDirection == 2:
+            self.currentDirection = -2
+        elif keys[pygame.K_DOWN] and self.currentDirection == 1:
+            self.currentDirection = -1
+        elif keys[pygame.K_UP] and self.currentDirection == -1:
+            self.currentDirection = 1
+        elif keys[pygame.K_LEFT] and self.currentDirection == -2:
+            self.currentDirection = 2
 
         if (control.px_X[(self.x)] != -1 and control.px_Y[(self.y)] != -1):
             if ((self.currentDirection in control.directions[control.intersections[control.px_Y[(self.y)]][control.px_X[(self.x)]]]) == False):
